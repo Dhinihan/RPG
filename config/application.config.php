@@ -20,7 +20,8 @@ return array(
         'ZF\\Versioning',
         'ZF\\DevelopmentMode',
         'Application',
-        'example'
+        'example',
+        'Api'
     ),
     'module_listener_options' => array(
         'module_paths' => array(

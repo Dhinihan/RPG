@@ -12,6 +12,7 @@ class Module implements ApigilityProviderInterface, AutoloaderProviderInterface,
         $config = array();
         $configFiles = array(
             __DIR__ . '/config/module.config.php',
+            __DIR__ . '/config/perfil.module.config.php',
         );
         
         // Merge all module config options
