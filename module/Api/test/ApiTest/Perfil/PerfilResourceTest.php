@@ -4,8 +4,9 @@ namespace ApiTest\Perfil;
 use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 use ZF\Rest\ResourceEvent;
 use Api\Perfil\PerfilResource;
+use Application\Entity\Perfil;
 
-class PerfilTest extends AbstractHttpControllerTestCase
+class PerfilResourceTest extends AbstractHttpControllerTestCase
 {
 
     public function setUp()
@@ -20,7 +21,17 @@ class PerfilTest extends AbstractHttpControllerTestCase
         $this->setMockObects();
         $resource = $this->getApplicationServiceLocator()->get('Api\Perfil\PerfilResource');
         $test = $resource->dispatch((new ResourceEvent())->setName('fetchAll'));
-        $this->assertEquals('funcionou', $test[0]->nome);
+        $this->assertEquals('funcionou', $test[0]->getNome());
+        $this->assertEquals('funcionouMesmo', $test[1]->getNome());
+    }
+
+    public function testFetch()
+    {
+        $this->setMockObects();
+        $resource = $this->getApplicationServiceLocator()->get('Api\Perfil\PerfilResource');
+        $test = $resource->dispatch((new ResourceEvent())->setName('fetch')
+            ->setParam('id', 37));
+        $this->assertEquals('funciona', $test->getNome());
     }
 
     protected function setMockObects()
@@ -29,10 +40,17 @@ class PerfilTest extends AbstractHttpControllerTestCase
             ->disableOriginalConstructor()
             ->getMock();
         $dbMock->method('fetchAll')->will($this->returnValue(array(
-            (object) array(
+            new Perfil(array(
                 'nome' => 'funcionou'
-            )
+            )),
+            new Perfil(array(
+                'nome' => 'funcionouMesmo'
+            ))
         )));
+        $dbMock->method('fetch')->will($this->returnValue(new Perfil(array(
+            'nome' => 'funciona'
+        ))));
+        
         $this->getApplicationServiceLocator()
             ->setAllowOverride(true)
             ->setService('PerfilDB', $dbMock);

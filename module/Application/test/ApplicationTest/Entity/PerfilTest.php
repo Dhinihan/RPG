@@ -11,7 +11,7 @@ class PerfilTest extends \PHPUnit_Framework_TestCase
         return parent::setUp();
     }
 
-    public function testConstructor()
+    public function testHydration()
     {
         $perfil = new Perfil();
 
@@ -25,6 +25,12 @@ class PerfilTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('teste@teste.com', $perfil->getEmail());
         $this->assertEquals('Cidade Teste', $perfil->getCidade());
         $this->assertEquals('Sou apenas um teste.', $perfil->getSobreVoce());
+    }
+    
+    public function testGetArray()
+    {
+        $perfil = new Perfil(array('id'=>4, 'nome'=>'Teste'));
+        $this->assertEquals('Teste', $perfil->getArrayCopy()['nome']);
     }
     
 }

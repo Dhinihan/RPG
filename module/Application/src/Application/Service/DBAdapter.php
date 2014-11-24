@@ -13,7 +13,7 @@ class DBAdapter
             return false;
         $db = fopen($filename, 'r');
         $text = fread($db, filesize($filename));
-        $data = json_decode($text);
+        $data = json_decode($text, true);
         fclose($db);
         return $data;
     }

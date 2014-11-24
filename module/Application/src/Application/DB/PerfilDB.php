@@ -3,6 +3,7 @@ namespace Application\DB;
 
 use Zend\ServiceManager\ServiceLocatorAwareTrait;
 use Application\Service\DBAdapter;
+use Application\Entity\Perfil;
 
 class PerfilDB
 {
@@ -11,6 +12,15 @@ class PerfilDB
     public function fetchAll()
     {
         $dbReader = $this->getServiceLocator()->get('DBAdapter');
-        return $dbReader->readDB('data/perfil.json');
+        $data = $dbReader->readDB('data/perfil.json');
+        $entities = array();
+        foreach ($data as $entity)
+            $entities[] = new Perfil($entity);
+        return $entities;
+    }
+    
+    public function fetch()
+    {
+        
     }
 }

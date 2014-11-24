@@ -18,7 +18,7 @@ class PerfilDBTest extends AbstractControllerTestCase
     {
         $this->setMockObjects();
         $perfilDb = $this->getApplicationServiceLocator()->get('PerfilDB');
-        $this->assertEquals('funcionou', $perfilDb->fetchAll()[0]->test);
+        $this->assertEquals('funcionou', $perfilDb->fetchAll()[0]->getNome());
     }
     
 	public function setMockObjects()
@@ -27,8 +27,8 @@ class PerfilDBTest extends AbstractControllerTestCase
             ->disableOriginalConstructor()
             ->getMock();
         $dbAdapter->method('readDB')->will($this->returnValue(array(
-            (object) array(
-                'test' => 'funcionou'
+            array(
+                'nome' => 'funcionou'
             )
         )));
         $this->getApplicationServiceLocator()
