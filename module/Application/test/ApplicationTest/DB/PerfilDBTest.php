@@ -35,5 +35,4 @@ class PerfilDBTest extends AbstractControllerTestCase
             ->setAllowOverride(true)
             ->setService('DBAdapter', $dbAdapter);
     }
-
 }
