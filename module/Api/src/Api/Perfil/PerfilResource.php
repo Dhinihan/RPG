@@ -53,7 +53,11 @@ class PerfilResource extends AbstractResourceListener
     public function fetch($id)
     {
         $db = $this->getServiceLocator()->get('PerfilDB');
-        return $db->fetch($id);
+    try {
+            return $db->fetch($id);
+        } catch (Exception $e) {
+            return new ApiProblem($e->getCode(), $e->getMessage());
+        }
     }
 
     /**
@@ -65,7 +69,11 @@ class PerfilResource extends AbstractResourceListener
     public function fetchAll($params = array())
     {
         $db = $this->getServiceLocator()->get('PerfilDB');
-        return $db->fetchAll();
+        try {
+            return $db->fetchAll();
+        } catch (Exception $e) {
+            return new ApiProblem($e->getCode(), $e->getMessage());
+        }
     }
 
     /**
@@ -77,7 +85,12 @@ class PerfilResource extends AbstractResourceListener
      */
     public function patch($id, $data)
     {
-        return new ApiProblem(405, 'The PATCH method has not been defined for individual resources');
+        $db = $this->getServiceLocator()->get('PerfilDB');
+        try {
+            return $db->patch($id, $data);
+        } catch (Exception $e) {
+            return new ApiProblem($e->getCode(), $e->getMessage());
+        }
     }
 
     /**

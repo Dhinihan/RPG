@@ -23,4 +23,15 @@ class DBAdapterTest extends \PHPUnit_Framework_TestCase
         $db = new DBAdapter();
         $this->assertFalse($db->readDB('foo'));
     }
+    
+    /*public function testInsertNew()
+    {
+        $db = new DBAdapter();
+        $newId = $db->insert(array('test' => 'sou um cara novo'), 'data/mockDB.json');
+        $data = $db->readDB('data/mockDB.json');
+        echo 'dentro     do teste:      ';
+        die(var_dump($data));
+        $this->assertEquals('sou um cara novo', $data[count($data)-1]['test']);
+        $this->assertEquals($newId, $data[count($data)-1]['id']);
+    }*/
 }
