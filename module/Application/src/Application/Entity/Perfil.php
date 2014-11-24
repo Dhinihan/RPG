@@ -6,6 +6,13 @@ use Zend\Stdlib\ArraySerializableInterface;
 class Perfil implements ArraySerializableInterface
 {
 
+    protected $id;
+    protected $nome;
+    protected $email;
+    protected $cidade;
+    protected $sobrevoce;
+    
+    
     public function exchangeArray(array $array)
     {}
 

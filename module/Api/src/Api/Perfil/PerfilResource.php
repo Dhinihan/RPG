@@ -5,10 +5,12 @@ use ZF\ApiProblem\ApiProblem;
 use ZF\Rest\AbstractResourceListener;
 use ZF\ContentNegotiation\JsonModel;
 use Application\Entity\Perfil;
+use Zend\ServiceManager\ServiceLocatorAwareTrait;
 
 class PerfilResource extends AbstractResourceListener
 {
-
+    use ServiceLocatorAwareTrait;
+    
     /**
      * Create a resource
      *
@@ -61,7 +63,8 @@ class PerfilResource extends AbstractResourceListener
      */
     public function fetchAll($params = array())
     {
-        return array(new Perfil(), new Perfil());
+        $db = $this->getServiceLocator()->get('PerfilDB');
+        return $db->fetchAll();
     }
 
     /**

@@ -20,6 +20,11 @@ return array(
             )
         )
     ),
+    'service_manager' => array(
+        'factories' => array(
+            'Api\Perfil\PerfilResource' => 'Api\Perfil\PerfilResourceFactory'
+        )
+    ),
     'zf-rest' => array(
         'Api\Perfil\Controller' => array(
             'listener' => 'Api\Perfil\PerfilResource',
@@ -55,14 +60,14 @@ return array(
                 'entity_identifier_name' => 'id',
                 'route_name' => 'api/perfil',
                 'route_identifier_name' => 'id',
-                'hydrator' => 'Zend\\Stdlib\\Hydrator\\ArraySerializable',
+                'hydrator' => 'Zend\\Stdlib\\Hydrator\\ArraySerializable'
             ),
             'example\\V1\\Rest\\Example\\ExampleCollection' => array(
                 'entity_identifier_name' => 'id',
                 'route_name' => 'pefil',
                 'route_identifier_name' => 'id',
-                'is_collection' => true,
-            ),
-        ),
-    ),
+                'is_collection' => true
+            )
+        )
+    )
 );

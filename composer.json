@@ -10,7 +10,8 @@
     "require": {
         "php": ">=5.3.3",
         "zendframework/zendframework": "2.3.*",
-        "zfcampus/zf-apigility": "~1.0"
+        "zfcampus/zf-apigility": "~1.0",
+        "phpunit/php-code-coverage": "3.0.*@dev"
     },
     "require-dev": {
         "zfcampus/zf-apigility-admin": "~1.0",
