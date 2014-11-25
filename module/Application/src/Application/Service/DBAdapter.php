@@ -20,14 +20,37 @@ class DBAdapter
     public function insert(array $entry, $filename)
     {
         $data = $this->read($filename);
-        $entry['id'] = $data['nextId'];
-        $data['entries'][] = $entry;
-        $data['nextId']++;
+        if (isset($entry['id']))
+            $data = $this->edit($entry, $data);
+        else
+            $data = $this->insertNew($entry, $data);
         $text = json_encode($data);
         $db = fopen($filename, 'w');
         fwrite($db, $text);
         fclose($db);
         return $entry['id'];
+    }
+
+    protected function insertNew(array &$entry, array $data)
+    {
+        $entry['id'] = $data['nextId'];
+        $data['entries'][] = $entry;
+        $data['nextId'] ++;
+        return $data;
+    }
+
+    protected function edit(array &$entry, array $data)
+    {
+        $index = - 1;
+        foreach ($data['entries'] as $i => $value)
+            if ($value['id'] == $entry['id']) {
+                $index = $i;
+                break;
+            }
+        if ($index == - 1)
+            throw new \Exception("Não há nenhuma entidade com código " . $entry['id']);
+        $data['entries'][$index] = $entry;
+        return $data;
     }
 
     /**
@@ -44,9 +67,10 @@ class DBAdapter
         $this->testJson();
         return $data;
     }
-	protected function testJson()
+
+    protected function testJson()
     {
-        switch(json_last_error()) {
+        switch (json_last_error()) {
             case JSON_ERROR_DEPTH:
                 echo ' - Maximum stack depth exceeded';
                 break;
@@ -58,5 +82,4 @@ class DBAdapter
                 break;
         }
     }
-
 }
