@@ -10,6 +10,13 @@ class DBAdapterTest extends \PHPUnit_Framework_TestCase
     {
         parent::setUp();
     }
+    
+    public function tearDown()
+    {
+        $db = fopen('data/mockDB.json', 'w');
+        fwrite($db, '{"nextId":3,"entries":[{"test":"funcionou","id":1},{"test":"funcionou2","id":2}]}');
+        fclose($db);
+    }
 
     public function testGetExistingDB()
     {
@@ -24,14 +31,13 @@ class DBAdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($db->readDB('foo'));
     }
     
-    /*public function testInsertNew()
+    public function testInsertNew()
     {
         $db = new DBAdapter();
+        $data = $db->readDB('data/mockDB.json');
         $newId = $db->insert(array('test' => 'sou um cara novo'), 'data/mockDB.json');
         $data = $db->readDB('data/mockDB.json');
-        echo 'dentro     do teste:      ';
-        die(var_dump($data));
         $this->assertEquals('sou um cara novo', $data[count($data)-1]['test']);
         $this->assertEquals($newId, $data[count($data)-1]['id']);
-    }*/
+    }
 }

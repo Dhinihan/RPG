@@ -22,6 +22,7 @@ class DBAdapter
         $data = $this->read($filename);
         $entry['id'] = $data['nextId'];
         $data['entries'][] = $entry;
+        $data['nextId']++;
         $text = json_encode($data);
         $db = fopen($filename, 'w');
         fwrite($db, $text);
@@ -37,9 +38,25 @@ class DBAdapter
     protected function read($filename)
     {
         $db = fopen($filename, 'r');
-        $text = fread($db, filesize($filename));
+        $text = file_get_contents($filename);
         fclose($db);
-        $data = unserialize(base64_decode($text));
+        $data = json_decode($text, true);
+        $this->testJson();
         return $data;
     }
+	protected function testJson()
+    {
+        switch(json_last_error()) {
+            case JSON_ERROR_DEPTH:
+                echo ' - Maximum stack depth exceeded';
+                break;
+            case JSON_ERROR_CTRL_CHAR:
+                echo ' - Unexpected control character found';
+                break;
+            case JSON_ERROR_SYNTAX:
+                echo ' - Syntax error, malformed JSON';
+                break;
+        }
+    }
+
 }
