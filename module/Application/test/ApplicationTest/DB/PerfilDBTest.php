@@ -52,6 +52,14 @@ class PerfilDBTest extends AbstractControllerTestCase
         $this->assertEquals('Continuo Sendo um teste.', $testPerfil->getSobreVoce());
         $this->assertEquals('funcionouMesmo', $testPerfil->getNome());
     }
+    
+    public function testCreateEntity()
+    {
+        $this->setMockObjects();
+        $perfilDb = $this->getApplicationServiceLocator()->get('PerfilDB');
+        $testPerfil = $perfilDb->create(array('sobreVoce' => 'Sou um novo teste.'));
+        $this->assertEquals('Sou um novo teste.', $testPerfil->getSobreVoce());
+    }
 
     public function setMockObjects()
     {

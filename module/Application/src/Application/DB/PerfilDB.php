@@ -50,4 +50,20 @@ class PerfilDB
             ->insert($perfil->getArrayCopy(), 'data/perfil.json');
         return $perfil;
     }
+    
+    /**
+     *
+     * @param array $data
+     * @return \Application\Entity\Perfil
+     */
+    public function create(array $data)
+    {
+        $perfil = new Perfil();
+        $perfil->exchangeArray($data);
+        $id = $this->getServiceLocator()
+        ->get('DBAdapter')
+        ->insert($perfil->getArrayCopy(), 'data/perfil.json');
+        $perfil->setId($id);
+        return $perfil;
+    }
 }

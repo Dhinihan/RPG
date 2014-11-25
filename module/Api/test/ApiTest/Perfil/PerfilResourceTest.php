@@ -47,12 +47,60 @@ class PerfilResourceTest extends AbstractHttpControllerTestCase
         $this->assertEquals('Continuo sendo um teste.', $test->getSobreVoce());
     }
 
+    public function testCreate()
+    {
+        $this->setMockObects();
+        $resource = $this->getApplicationServiceLocator()->get('Api\Perfil\PerfilResource');
+        $test = $resource->dispatch((new ResourceEvent())->setName('create')
+            ->setParam('data', array(
+            'sobreVoce' => 'Sou um novo perfil!'
+        )));
+        $this->assertEquals('Sou um novo perfil!', $test->getSobreVoce());
+    }
+
     protected function setMockObects()
     {
         $dbMock = $this->getMockBuilder('Application\DB\PerfilDB')
             ->disableOriginalConstructor()
             ->getMock();
         
+        $dbMock = $this->defineFetchAll($dbMock);
+        $dbMock = $this->defineFetch($dbMock);
+        $dbMock = $this->definePatch($dbMock);
+        $dbMock = $this->defineCreate($dbMock);
+
+        $this->getApplicationServiceLocator()
+            ->setAllowOverride(true)
+            ->setService('PerfilDB', $dbMock);
+    }
+	protected function defineCreate($dbMock)
+    {
+        $dbMock->method('create')->will($this->returnValue(new Perfil(array(
+            'sobreVoce' => 'Sou um novo perfil!'
+        ))));
+        return $dbMock;
+    }
+
+	protected function definePatch($dbMock)
+    {
+        $dbMock->method('patch')->will($this->returnValue(new Perfil(array(
+            'nome' => 'funciona',
+            'sobreVoce' => 'Continuo sendo um teste.'
+        ))));
+        return $dbMock;
+    }
+
+    protected function defineFetch($dbMock)
+    {
+        $dbMock->method('fetch')->will($this->returnValue(new Perfil(array(
+            'nome' => 'funciona',
+            'sobreVoce' => 'Apenas um teste'
+        ))));
+        return $dbMock;
+    }
+
+    protected function defineFetchAll($dbMock)
+    {
         $dbMock->method('fetchAll')->will($this->returnValue(array(
             new Perfil(array(
                 'nome' => 'funcionou'
@@ -61,19 +109,6 @@ class PerfilResourceTest extends AbstractHttpControllerTestCase
                 'nome' => 'funcionouMesmo'
             ))
         )));
-        
-        $dbMock->method('fetch')->will($this->returnValue(new Perfil(array(
-            'nome' => 'funciona',
-            'sobreVoce' => 'Apenas um teste'
-        ))));
-        
-        $dbMock->method('patch')->will($this->returnValue(new Perfil(array(
-            'nome' => 'funciona',
-            'sobreVoce' => 'Continuo sendo um teste.'
-        ))));
-        
-        $this->getApplicationServiceLocator()
-            ->setAllowOverride(true)
-            ->setService('PerfilDB', $dbMock);
+        return $dbMock;
     }
 }

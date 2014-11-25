@@ -10,7 +10,7 @@ use Zend\ServiceManager\ServiceLocatorAwareTrait;
 class PerfilResource extends AbstractResourceListener
 {
     use ServiceLocatorAwareTrait;
-    
+
     /**
      * Create a resource
      *
@@ -19,6 +19,12 @@ class PerfilResource extends AbstractResourceListener
      */
     public function create($data)
     {
+        $db = $this->getServiceLocator()->get('PerfilDB');
+        try {
+            return $db->create((array) $data);
+        } catch (Exception $e) {
+            return new ApiProblem($e->getCode(), $e->getMessage());
+        }
     }
 
     /**
@@ -52,7 +58,7 @@ class PerfilResource extends AbstractResourceListener
     public function fetch($id)
     {
         $db = $this->getServiceLocator()->get('PerfilDB');
-    try {
+        try {
             return $db->fetch($id);
         } catch (Exception $e) {
             return new ApiProblem($e->getCode(), $e->getMessage());

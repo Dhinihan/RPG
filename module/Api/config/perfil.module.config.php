@@ -36,7 +36,8 @@ return array(
                 'PATCH'
             ),
             'collection_http_methods' => array(
-                'GET'
+                'GET',
+                'POST'
             ),
             'collection_query_whitelist' => array(),
             'page_size' => 25,

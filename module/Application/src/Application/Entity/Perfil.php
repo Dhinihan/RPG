@@ -71,7 +71,7 @@ class Perfil implements ArraySerializableInterface
         }
     }
 
-    protected function setId($id)
+    public function setId($id)
     {
         $this->id = $id;
         return $this;
