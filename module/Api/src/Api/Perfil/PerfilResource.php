@@ -19,7 +19,6 @@ class PerfilResource extends AbstractResourceListener
      */
     public function create($data)
     {
-        return new ApiProblem(405, 'The POST method has not been defined');
     }
 
     /**
@@ -87,7 +86,7 @@ class PerfilResource extends AbstractResourceListener
     {
         $db = $this->getServiceLocator()->get('PerfilDB');
         try {
-            return $db->patch($id, $data);
+            return $db->patch($id, (array) $data);
         } catch (Exception $e) {
             return new ApiProblem($e->getCode(), $e->getMessage());
         }

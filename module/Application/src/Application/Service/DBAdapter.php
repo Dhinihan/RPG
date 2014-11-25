@@ -24,8 +24,8 @@ class DBAdapter
             $data = $this->edit($entry, $data);
         else
             $data = $this->insertNew($entry, $data);
-        $text = json_encode($data);
-        $db = fopen($filename, 'w');
+        $text = json_encode($data, JSON_PRETTY_PRINT);
+        $db = fopen($filename, 'w') or die('aqui');
         fwrite($db, $text);
         fclose($db);
         return $entry['id'];

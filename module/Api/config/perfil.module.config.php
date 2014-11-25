@@ -32,7 +32,8 @@ return array(
             'route_identifier_name' => 'id',
             'collection_name' => 'perfil',
             'entity_http_methods' => array(
-                'GET'
+                'GET',
+                'PATCH'
             ),
             'collection_http_methods' => array(
                 'GET'
