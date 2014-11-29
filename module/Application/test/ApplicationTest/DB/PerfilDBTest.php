@@ -43,22 +43,33 @@ class PerfilDBTest extends AbstractControllerTestCase
             $this->assertEquals(400, $e->getCode());
         }
     }
-    
+
     public function testPatchEntity()
     {
         $this->setMockObjects();
         $perfilDb = $this->getApplicationServiceLocator()->get('PerfilDB');
-        $testPerfil = $perfilDb->patch(37, array('sobreVoce' => 'Continuo Sendo um teste.'));
+        $testPerfil = $perfilDb->patch(37, array(
+            'sobreVoce' => 'Continuo Sendo um teste.'
+        ));
         $this->assertEquals('Continuo Sendo um teste.', $testPerfil->getSobreVoce());
         $this->assertEquals('funcionouMesmo', $testPerfil->getNome());
     }
-    
+
     public function testCreateEntity()
     {
         $this->setMockObjects();
         $perfilDb = $this->getApplicationServiceLocator()->get('PerfilDB');
-        $testPerfil = $perfilDb->create(array('sobreVoce' => 'Sou um novo teste.'));
+        $testPerfil = $perfilDb->create(array(
+            'sobreVoce' => 'Sou um novo teste.'
+        ));
         $this->assertEquals('Sou um novo teste.', $testPerfil->getSobreVoce());
+    }
+
+    public function testDeleteEntity()
+    {
+        $this->setMockObjects();
+        $perfilDb = $this->getApplicationServiceLocator()->get('PerfilDB');
+        $this->assertTrue($perfilDb->delete(1));
     }
 
     public function setMockObjects()
@@ -82,6 +93,8 @@ class PerfilDBTest extends AbstractControllerTestCase
                 'sobreVoce' => 'Apenas um teste'
             )
         )));
+        
+        $dbAdapter->method('delete')->will($this->returnValue(true));
         
         $this->getApplicationServiceLocator()
             ->setAllowOverride(true)

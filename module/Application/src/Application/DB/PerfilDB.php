@@ -66,4 +66,9 @@ class PerfilDB
         $perfil->setId($id);
         return $perfil;
     }
+    
+    public function delete($id)
+    {
+        return $this->getServiceLocator()->get('DBAdapter')->delete($id, 'data/perfil.json');
+    }
 }

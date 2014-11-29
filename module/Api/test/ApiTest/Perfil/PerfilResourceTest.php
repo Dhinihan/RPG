@@ -16,7 +16,7 @@ class PerfilResourceTest extends AbstractHttpControllerTestCase
         parent::setUp();
     }
 
-    public function testfetchAll()
+    public function testFetchAll()
     {
         $this->setMockObects();
         $resource = $this->getApplicationServiceLocator()->get('Api\Perfil\PerfilResource');
@@ -57,6 +57,15 @@ class PerfilResourceTest extends AbstractHttpControllerTestCase
         )));
         $this->assertEquals('Sou um novo perfil!', $test->getSobreVoce());
     }
+    
+    public function testDelete()
+    {
+        $this->setMockObects();
+        $resource = $this->getApplicationServiceLocator()->get('Api\Perfil\PerfilResource');
+        $test = $resource->dispatch((new ResourceEvent())->setName('delete')
+            ->setParam('id', 2));
+        $this->assertTrue($test);
+    }
 
     protected function setMockObects()
     {
@@ -68,11 +77,19 @@ class PerfilResourceTest extends AbstractHttpControllerTestCase
         $dbMock = $this->defineFetch($dbMock);
         $dbMock = $this->definePatch($dbMock);
         $dbMock = $this->defineCreate($dbMock);
+        $dbMock = $this->defineDelete($dbMock);
 
         $this->getApplicationServiceLocator()
             ->setAllowOverride(true)
             ->setService('PerfilDB', $dbMock);
     }
+    
+    protected function defineDelete($dbMock)
+    {
+        $dbMock->method('delete')->will($this->returnValue(true));
+        return $dbMock;
+    }
+    
 	protected function defineCreate($dbMock)
     {
         $dbMock->method('create')->will($this->returnValue(new Perfil(array(

@@ -10,4 +10,5 @@ composer.lock
 composer.phar
 vendor
 data
+public/js/bower_components
 

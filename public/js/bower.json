@@ -1,0 +1,22 @@
+{
+  "name": "RPG",
+  "version": "0.0.0",
+  "homepage": "https://github.com/Dhinihan/RPG",
+  "description": "Um protótipo de uma Rede Social para jogadores e mestres de RPG",
+  "authors": [
+    "Vinícius",
+    "Eduardo"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": ""
+  }
+}

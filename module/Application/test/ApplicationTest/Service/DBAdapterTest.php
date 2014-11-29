@@ -52,4 +52,12 @@ class DBAdapterTest extends \PHPUnit_Framework_TestCase
         $data = $db->readDB('data/mockDB.json');
         $this->assertEquals('sou um cara velho atualizado', $data[1]['test']);
     }
+    
+    public function testDelete()
+    {
+        $db = new DBAdapter();
+        $test = $db->delete(2, 'data/mockDB.json');
+        $this->assertTrue($test);
+        $test = $db->readDB('data/mockDB.json');
+    }
 }

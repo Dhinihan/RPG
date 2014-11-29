@@ -33,7 +33,8 @@ return array(
             'collection_name' => 'perfil',
             'entity_http_methods' => array(
                 'GET',
-                'PATCH'
+                'PATCH',
+                'DELETE'
             ),
             'collection_http_methods' => array(
                 'GET',

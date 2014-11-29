@@ -24,13 +24,36 @@ class DBAdapter
             $data = $this->edit($entry, $data);
         else
             $data = $this->insertNew($entry, $data);
+        $this->write($data, $filename);
+
+        return $entry['id'];
+    }
+
+    public function delete($id, $filename)
+    {
+        $data = $this->read($filename);
+        $deleted = false;
+        foreach ($data['entries'] as $index => $entity)
+        {
+            if($entity['id'] == $id)
+            {
+                unset($data['entries'][$index]);
+                $this->write($data, $filename);
+                $deleted = true;
+                break;
+            }
+        }
+        return $deleted;
+    }
+
+    protected function write($data, $filename)
+    {
         $text = json_encode($data, JSON_PRETTY_PRINT);
         $db = fopen($filename, 'w') or die('aqui');
         fwrite($db, $text);
         fclose($db);
-        return $entry['id'];
     }
-
+    
     protected function insertNew(array &$entry, array $data)
     {
         $entry['id'] = $data['nextId'];
