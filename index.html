@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-br" ng-app="rpgApp">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, maximum-scale=1, initial-scale=1.0, user-scalable=no">
+
+<title>RPG</title>
+
+<!-- Layout -->
+<link href="layout/css/bootstrap.min.css" rel="stylesheet">
+<link href="layout/css/style.css" rel="stylesheet">
+
+<!--Bower-->
+<script src="bower_components/jQuery/dist/jquery.min.js"></script>
+<script src="bower_components/angular/angular.min.js"></script>
+<script src="bower_components/angular-route/angular-route.min.js"></script>
+<script src="bower_components/angular-i18n/angular-locale_pt-br.js"></script>
+<script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+<script
+	src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+<script src="bower_components/lodash/dist/lodash.min.js"></script>
+<script src="bower_components/restangular/dist/restangular.min.js"></script>
+<script
+	src='bower_components/ngInfiniteScroll/build/ng-infinite-scroll.min.js'></script>
+<link rel="stylesheet"
+	href="bower_components/angular-toastr/dist/angular-toastr.min.css" />
+<script src="bower_components/angular-toastr/dist/angular-toastr.min.js"></script>
+<!--Componets-->
+<!-- <script src="components/agendamento-grid/agendamento-grid.js"></script> -->
+<!-- <script src="components/agendamento-grid/agendamento-grid-directive.js"></script> -->
+<!--AplicaÃ§Ã£o-->
+<script src="app.js"></script>
+<script src="app-service.js"></script>
+<!-- <script src="config/app.local.config.js"></script> -->
+
+<script src="perfil/perfil-controller.js"></script>
+<!-- <script src="perfil/perfil-service.js"></script> -->
+
+<style type="text/css">
+body {
+	background: #eef
+}
+</style>
+
+</head>
+<body>
+	<nav class="navbar navbar-inverse" role="navigation">
+		<div class="row-fluid">
+			<div class="col-md-8">
+				<h1 class="text-primary" style="font-variant: small-caps">
+					<img src="layout/img/dice.png">Rede Interplanar<small>
+						<button type="button" class="navbar-toggle"
+							ng-click="navbarCollapsed = !navbarCollapsed">
+							<span class="sr-only">Toggle navigation</span> <span
+								class="icon-bar"></span> <span class="icon-bar"></span> <span
+								class="icon-bar"></span>
+						</button> <a class="navbar-brand" href="#"> <!-- your branding here -->
+					</a>
+					</small>
+				</h1>
+			</div>
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse col-md-6"
+				collapse="!navbarCollapsed">
+				<ul class="nav navbar-nav">
+					<li class="active"><button class="btn btn-link">Início</button></li>
+					<li><a href="#about">Crie seu perfil</a></li>
+					<li><a href="#contact">Procure um amigo</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<div class="container-fluid" ng-view></div>
+</body>
+</html>
