@@ -17,6 +17,14 @@
     "tests"
   ],
   "dependencies": {
-    "jquery": ""
+    "angular-route": "",
+    "angular": "",
+    "angular-i18n": "",
+    "restangular": "",
+    "angular-bootstrap": "",
+    "ngInfiniteScroll": "",
+    "angular-toastr":"",
+    "jQuery":""
+    
   }
 }
