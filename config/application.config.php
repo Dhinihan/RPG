@@ -18,7 +18,6 @@ return array(
         'ZF\\Rest',
         'ZF\\Rpc',
         'ZF\\Versioning',
-        'ZF\\DevelopmentMode',
         'Application',
         'example',
         'Api'
