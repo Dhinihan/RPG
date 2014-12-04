@@ -49,7 +49,7 @@ class DBAdapter
     protected function write($data, $filename)
     {
         $text = json_encode($data, JSON_PRETTY_PRINT);
-        $db = fopen($filename, 'w') or die('aqui');
+        $db = fopen($filename, 'w') or die('Não consegui abrir o arquivo');
         fwrite($db, $text);
         fclose($db);
     }
