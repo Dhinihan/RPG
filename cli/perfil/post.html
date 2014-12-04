@@ -6,31 +6,38 @@
 
 <div class="row">
 	<div class="col-md-9">
+		<div class="alert alert-success" ng-show="success">
+			<span ng-click="success = false" class="close" data-dismiss="alert" >&times;</span> <strong>Parabéns</strong>
+			Seu perfil foi postado com sucesso.
+		</div>
 		<form role="form">
 			<div class="form-group top-buffer">
 				<div class="col-md-12">
-					<label for="InputNome">Nome Completo:</label> <input type="text"
-						class="form-control" id="InputNome" placeholder="Seu nome aqui">
+					<label for="InputNome">Nome Completo:</label> <input
+						ng-model="perfil.nome" type="text" class="form-control"
+						id="InputNome" placeholder="Seu nome aqui">
 				</div>
 			</div>
 			<div class="form-group">
 				<div class="col-md-6 top-buffer">
-					<label for="InputEmail">Email:</label> <input type="email"
-						class="form-control" id="InputEmail"
-						placeholder="exemplo@exemplo.com">
+					<label for="InputEmail">Email:</label> <input
+						ng-model="perfil.email" type="email" class="form-control"
+						id="InputEmail" placeholder="exemplo@exemplo.com">
 				</div>
 				<div class="col-md-6 top-buffer">
-					<label for="InputCidade">Cidade:</label> <input type="text"
-						class="form-control" id="InputCidade"
-						placeholder="Sua cidade aqui">
+					<label for="InputCidade">Cidade:</label> <input
+						ng-model="perfil.cidade" type="text" class="form-control"
+						id="InputCidade" placeholder="Sua cidade aqui">
 				</div>
 			</div>
 			<div class="col-md-12 top-buffer">
 				<label for="InputSobre">Sobre Você:</label>
-				<textarea class="form-control" rows="3" id="InputSobre"></textarea>
+				<textarea ng-model="perfil.sobreVoce" class="form-control" rows="3"
+					id="InputSobre"></textarea>
 			</div>
 			<div class="col-md-12 top-buffer">
-				<button type="submit" class="btn btn-primary">Criar</button>
+				<button type="submit" class="btn btn-primary"
+					ng-click="criar(perfil)">Criar</button>
 			</div>
 		</form>
 	</div>

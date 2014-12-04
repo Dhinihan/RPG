@@ -19,7 +19,7 @@ rpgApp.config([ '$routeProvider', function($routeProvider) {
 } ]);
 
 rpgApp.config([ 'RestangularProvider', function(RestangularProvider) {
-    RestangularProvider.setBaseUrl("http://localhost/rpg/");
+    RestangularProvider.setBaseUrl("http://localhost/rpg/api/");
     RestangularProvider.setRestangularFields({
 	selfLink : "_links.self.href"
     });
