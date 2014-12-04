@@ -8,6 +8,3 @@ nbproject
 .settings
 composer.phar
 vendor
-data
-cli/bower_components
-
