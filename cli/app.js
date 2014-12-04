@@ -7,6 +7,12 @@ rpgApp.config([ '$routeProvider', function($routeProvider) {
     $routeProvider.when('/index', {
 	templateUrl : 'perfil/index.html',
 	controller : 'perfilIndexCtrl'
+    }).when('/post', {
+	templateUrl : 'perfil/post.html',
+	controller : 'perfilPostCtrl'
+    }).when('/list', {
+	templateUrl : 'perfil/list.html',
+	controller : 'perfilListCtrl'
     }).otherwise({
 	redirectTo : '/index'
     });
