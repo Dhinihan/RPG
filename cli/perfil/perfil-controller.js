@@ -25,11 +25,20 @@ rpgApp.controller('perfilPostCtrl', [ '$scope', '$rootScope' , 'Perfil',  functi
 
 rpgApp.controller('perfilListCtrl', [ '$scope', '$rootScope', 'Perfil' , function($scope, $rootScope, Perfil) {
     $scope.navbarCollapsed = true;
-    $scope.perfis = Perfil.getList().$object;
+    $scope.buscando = true;
     console.log("teste");
     $rootScope.index =  "inactive";
     $rootScope.post  =  "inactive";
     $rootScope.list  =  "active";
+    
+    $scope.busca = function() 
+    {
+	Perfil.getList().then(function(data) {
+	    $scope.perfis = data;
+	    $scope.buscando = false;
+	})
+    }
+    
     
     
     

@@ -1,6 +1,7 @@
-<div class="row">
+<div class="row" ng-init="busca()">
 	<div class="col-md-9">
-		<table class="table table-hover table-responsive">
+
+		<table class="table table-hover table-responsive" ng-hide="buscando">
 			<thead>
 				<tr>
 					<th>Nome</th>
@@ -8,16 +9,18 @@
 					<th>Cidade</th>
 				</tr>
 			</thead>
-			<div>
-			<tr ng-repeat="perfil in perfis" ng-click="mostra = !mostra" data-toggle="tooltip" title={{perfil.sobreVoce}}>
+			<tr ng-repeat="perfil in perfis" ng-click="mostra = !mostra"
+				data-toggle="tooltip" title={{perfil.sobreVoce}}>
 				<td>{{perfil.nome}}</td>
 				<td>{{perfil.email}}</td>
 				<td>{{perfil.cidade}}</td>
 			</tr>
 		</table>
-		
+		<div class="container" ng-show="buscando">
+			<img src="layout/img/loading.gif" class="img-responsive">
+		</div>
 	</div>
 	<div class="col-md-3  back cinza-btn">
-		<img src="layout/img/futuro.png" class="img-responsive" >
+		<img src="layout/img/futuro.png" class="img-responsive">
 	</div>
 </div>
